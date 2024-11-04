@@ -36,4 +36,29 @@ const userRegister = asyncHandler(async (req,res) => {
 
 })
 
-module.exports = { userRegister }
+
+const userLogin = asyncHandler(async (req,res) => {
+    const { email, password } = req.body
+
+    if (!email || !password) {
+        res.status(400);
+        throw new Error("Please fill the fields");
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+        res.status(401);
+        throw new Error("Invalid email or password");
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+        res.status(401);
+        throw new Error("Invalid email or password");
+    }
+
+    res.status(201).json({message: "User Logged in Successfully", user})
+
+})
+
+module.exports = { userRegister, userLogin }

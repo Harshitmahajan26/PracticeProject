@@ -3,10 +3,12 @@ const router = express.Router()
 
 const {
     userRegister,
-    loginUser
+    userLogin
 } = require("../controllers/userController")
 
 router.post("/register", userRegister)
+
+router.post("/login", userLogin)
 
 // router.post("/login", loginUser)
 
