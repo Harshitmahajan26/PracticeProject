@@ -21,6 +21,14 @@ app.use(cors())
 app.use("/api/user", require("./routes/userRoutes"))
 
 
+app.use("/api/doctor", require("./routes/doctorRoutes"))
+
+// app.post("/api",(req,res)=>{
+//     const {name}=req.body
+//     res.send(name)
+// })
+
+
 
 
 app.get("/", (req,res)=>{
@@ -47,6 +55,9 @@ app.get("/users", (req, res) => {
 
     res.render("users", { users });
 });
+
+
+
 
 app.use(errorHandler)
 
