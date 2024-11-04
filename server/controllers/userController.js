@@ -3,8 +3,9 @@ const bcrypt = require("bcrypt")
 const User = require("../models/userModel")
 require("dotenv").config()
 
-const registerUser = asyncHandler(async (req,res) => {
-    const { firstName, lastName, age, bloodGroup, gender, email, password, phoneNumber } = req.body
+
+const userRegister = asyncHandler(async (req,res) => {
+    const { email, firstName, lastName, age, bloodGroup, gender, phoneNumber, password } = req.body
 
     if(!firstName || !lastName || !age || !bloodGroup || !gender|| !email || !password || !phoneNumber){
         res.status(400)
@@ -35,4 +36,4 @@ const registerUser = asyncHandler(async (req,res) => {
 
 })
 
-module.exports = { registerUser }
+module.exports = { userRegister }
