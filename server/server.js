@@ -59,8 +59,10 @@ const Upload = require("./models/UploadModel")
 app.post("/profile", upload.single('avatar'), async (req, res, next) => {
     try {
         const profileData = {
-            username: req.body.username,
-            avatar: req.file.path, // Save the file path
+            avatar: {
+                fileName: req.file.filename, // Use req.file.filename for file name
+                filePath: req.file.path,     // Use req.file.path for file path
+            },
         };
 
         const newProfile = new Upload(profileData);

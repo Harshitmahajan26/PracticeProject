@@ -1,8 +1,11 @@
 const mongoose = require('mongoose');
 
 const uploadSchema = new mongoose.Schema({
-    username: String,
-    avatar: String, // store the path to the image file
+    avatar:
+    {
+        fileName: String,
+        filePath: String
+    }
 });
 
 module.exports = mongoose.model("Upload", uploadSchema)
