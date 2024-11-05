@@ -6,8 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-    {{> header}}
+    {{!-- {{> header}} --}}
 
-    {{username}}
+    <div>
+        <form action="/profile" method="post" enctype="multipart/form-data">
+            <input type="file" name="avatar">
+            <button type="submit" value="Upload">Upload</button>
+        </form>
+    </div>
+    
+    {{!-- {{username}} --}}
 </body>
 </html>
