@@ -25,7 +25,7 @@ app.use("/api/user", require("./routes/userRoutes"))
 
 
 app.use("/api/doctor", require("./routes/doctorRoutes"))
-
+app.use("/uploads", express.static("uploads"));
 // app.post("/api",(req,res)=>{
 //     const {name}=req.body
 //     res.send(name)
@@ -101,6 +101,25 @@ app.get("/users", (req, res) => {
 
     res.render("users", { users });
 });
+
+app.get("/getPhotos", async (req, res) => {
+    try {
+        // Assuming Upload is a model for your database
+        const uploads = await Upload.find(); // Fetch all uploaded photos from the database
+        res.render("users", { uploads }); // Pass the photos to the template
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error fetching photos");
+    }
+});
+
+
+    // res.json("hello")
+    // Upload.forEach(element => {
+    //     const photo = avatar.filePath
+    //     res.send(photo)
+    // });
 
 
 
