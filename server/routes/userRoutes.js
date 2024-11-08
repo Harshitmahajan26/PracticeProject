@@ -6,7 +6,14 @@ const {
     userLogin
 } = require("../controllers/userController")
 
-router.post("/register", userRegister)
+const {
+    generateToken,
+    validateJwtToken
+} = require("../middleware/jwtMiddleware")
+
+router.post("/register",userRegister)
+
+
 
 router.post("/login", userLogin)
 

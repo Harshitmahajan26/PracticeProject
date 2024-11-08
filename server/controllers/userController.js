@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler")
 const bcrypt = require("bcrypt")
 const User = require("../models/userModel")
+const jwt = require("jsonwebtoken");
+
 require("dotenv").config()
 
 
@@ -57,7 +59,10 @@ const userLogin = asyncHandler(async (req,res) => {
         throw new Error("Invalid email or password");
     }
 
-    res.status(201).json({message: "User Logged in Successfully", user})
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.PRIVATE_KEY, { expiresIn: '1h' });
+
+    // res.status(201).json({message: "User Logged in Successfully", user})
+    res.status(201).json({message: "User Logged in Successfully", user, token})
 
 })
 
