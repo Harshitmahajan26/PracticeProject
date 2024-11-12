@@ -3,7 +3,8 @@ const router = express.Router()
 
 const {
     userRegister,
-    userLogin
+    userLogin,
+    userProfile
 } = require("../controllers/userController")
 
 const {
@@ -13,11 +14,10 @@ const {
 
 router.post("/register",userRegister)
 
-
-
 router.post("/login", userLogin)
 
-// router.post("/login", loginUser)
+router.get("/getProfile", validateJwtToken, userProfile)
 
 module.exports = router
+
 
