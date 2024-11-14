@@ -23,13 +23,9 @@ app.use(cors())
 
 app.use("/api/user", require("./routes/userRoutes"))
 
-
 app.use("/api/doctor", require("./routes/doctorRoutes"))
 app.use("/uploads", express.static("uploads"));
-// app.post("/api",(req,res)=>{
-//     const {name}=req.body
-//     res.send(name)
-// })
+app.use("/api/newsletter", require("./routes/newsletterRoutes"))
 
 
 
@@ -115,11 +111,6 @@ app.get("/getPhotos", async (req, res) => {
 });
 
 
-    // res.json("hello")
-    // Upload.forEach(element => {
-    //     const photo = avatar.filePath
-    //     res.send(photo)
-    // });
 
 
 

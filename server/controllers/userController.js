@@ -79,9 +79,30 @@ const userProfile = asyncHandler(async (req, res) => {
 });
 
 
+const updateUserProfile = asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user.id);
+    const { firstName, email, phoneNumber, password } = req.body;
+
+    if (!user) {
+        res.status(404);
+        throw new Error("User Not Found");
+    }
+
+    if (firstName) user.firstName = firstName;
+    if (email) user.email = email;
+    if (phoneNumber) user.phoneNumber = phoneNumber;
+
+    if (password) {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
+    }
+
+    const updatedUser = await User.save();
+
+    return res.status(200).json({message: "Profile Updated Successfully",user: updatedUser})
+   
+})
 
 
 
-
-
-module.exports = { userRegister, userLogin, userProfile }
+module.exports = { userRegister, userLogin, userProfile, updateUserProfile }
